@@ -1,0 +1,42 @@
+pipeline{
+
+    agent any
+
+// uncomment the following lines by removing /* and */ to enable
+    tools{
+       nodejs 'nodejs' 
+    }
+    
+
+    stages{
+        stage('build-the-app'){
+            steps{
+                echo 'this is the build job'
+                sh 'npm install'
+                //sleep 4
+            }
+        }
+        stage('test-the-app'){
+            steps{
+                echo 'this is the test job'
+                sh 'npm test'
+                //sleep 9
+            }
+        }
+        stage('package-the-app'){
+            steps{
+                echo 'this is the package job'
+                sh 'npm package'
+                //sleep 7
+            }
+        }
+    }
+    
+    post{
+        always{
+            echo 'this pipeline has completed...'
+        }
+        
+    }
+    
+}
